@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cts.authorization.model.User;
-
-import lombok.extern.slf4j.Slf4j;
+//
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * Test class to test all the repository functionality
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
  */
 @SpringBootTest
-@Slf4j
+//@Slf4j
 class UserRepositoryTests {
 
 	@Autowired
@@ -29,22 +29,22 @@ class UserRepositoryTests {
 	@Test
 	@DisplayName("This method is responsible to test findById() method when user exists in database")
 	void testFindUserById_userExists() {
-		log.info("START - testFindUserById_userExists()");
+	//	log.info("START - testFindUserById_userExists()");
 		final String username = "admin1";
 		Optional<User> userOptional = userRepository.findById(username);
 		assertTrue(userOptional.isPresent());
 		assertEquals(username, userOptional.get().getUsername());
-		log.info("END - testFindUserById_userExists()");
+		//log.info("END - testFindUserById_userExists()");
 	}
 
 	@Test
 	@DisplayName("This method is responsible to test findById() method when user doesn not exists in database")
 	void testFindUserById_userDoesNotExists() {
-		log.info("START - testFindUserById_userDoesNotExists()");
+		//log.info("START - testFindUserById_userDoesNotExists()");
 		final String id = "adminDoesNotExist";
 		Optional<User> userOptional = userRepository.findById(id);
 		//assertTrue(userOptional.isEmpty()); 
 		assertTrue(!userOptional.isPresent());
-		log.info("END - testFindUserById_userDoesNotExists()");
+		//log.info("END - testFindUserById_userDoesNotExists()");
 	}
 }

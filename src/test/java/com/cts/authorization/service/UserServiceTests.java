@@ -23,14 +23,14 @@ import com.cts.authorization.exception.InvalidCredentialsException;
 import com.cts.authorization.model.User;
 import com.cts.authorization.repository.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * Test cases for user service
  * 
  */
 @SpringBootTest
-@Slf4j
+//@Slf4j
 class UserServiceTests {
 
 	@Autowired
@@ -45,7 +45,7 @@ class UserServiceTests {
 	@Test
 	@DisplayName("This method is responsible to test LoadUserByUsername() method when username is valid")
 	void testLoadUserByUsername_validUsername() {
-		log.info("START - testLoadUserByUsername_validUsername()");
+		///log.info("START - testLoadUserByUsername_validUsername()");
 
 		// Data to mock
 		User user = new User("admin1", "$2a$10$aMMcsBB18R7dqzC7Wcg3z.oiVQnNhgFGD0WMTZVeVtFCMMnru25AO", "ADMIN");
@@ -63,18 +63,18 @@ class UserServiceTests {
 		// Mock the repository
 		when(userRepository.findById(id)).thenReturn(userOptional);
 
-		log.info("Running the test case...");
+		//log.info("Running the test case...");
 		// checking condition
 		assertEquals(userServiceImpl.loadUserByUsername(id), securityUser);
 		assertNotNull(securityUser);
 
-		log.info("END - testLoadUserByUsername_validUsername()");
+		//log.info("END - testLoadUserByUsername_validUsername()");
 	}
 
 	@Test
 	@DisplayName("This method is responsible to test LoadUserByUsername() method when username is invalid")
 	void testLoadUserByUsername_invalidUsername() {
-		log.info("START - testLoadUserByUsername_invalidUsername()");
+		//log.info("START - testLoadUserByUsername_invalidUsername()");
 
 		User user = new User("admin1", "$2a$10$aMMcsBB18R7dqzC7Wcg3z.oiVQnNhgFGD0WMTZVeVtFCMMnru25AO", "ADMIN");
 
@@ -91,7 +91,7 @@ class UserServiceTests {
 		// Mock the repository
 		when(userRepository.findById(id)).thenReturn(userOptional);
 
-		log.info("Running the test case...");
+		//log.info("Running the test case...");
 		// checking condition
 		InvalidCredentialsException thrownException = assertThrows(InvalidCredentialsException.class,
 				() -> userServiceImpl.loadUserByUsername(id));
@@ -99,7 +99,7 @@ class UserServiceTests {
 		assertTrue(thrownException.getMessage().contains(ERROR_MESSAGE));
 		assertNotNull(securityUser);
 
-		log.info("END - testLoadUserByUsername_invalidUsername()");
+		//log.info("END - testLoadUserByUsername_invalidUsername()");
 	}
 
 	// Class to avoid User conflict

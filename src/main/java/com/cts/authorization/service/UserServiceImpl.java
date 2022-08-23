@@ -14,10 +14,10 @@ import com.cts.authorization.exception.InvalidCredentialsException;
 import com.cts.authorization.model.User;
 import com.cts.authorization.repository.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
+//@Slf4j
 public class UserServiceImpl implements UserDetailsService {
 
 	@Value("${userDetails.errorMessage}")
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserDetailsService {
 		if (!userOptional.isPresent()) {
 			throw new InvalidCredentialsException(USER_DOES_NOT_EXIST_MESSAGE);
 		} else {
-			log.info("Username: {} is valid", username);
+			//log.info("Username: {} is valid", username);
 			User user = userOptional.get();
 			return new org.springframework.security.core.userdetails.User(username, user.getPassword(),
 					Collections.singletonList(new SimpleGrantedAuthority(user.getRole())));

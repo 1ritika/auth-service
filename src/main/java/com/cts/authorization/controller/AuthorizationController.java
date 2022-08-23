@@ -28,7 +28,7 @@ import com.cts.authorization.model.JwtResponseToken;
 import com.cts.authorization.model.UserRequest;
 import com.cts.authorization.util.JwtUtil;
 
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * Authorization Controller to handle requests for logging in a valid user and
@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
  * 
  */
 @RestController
-@Slf4j
+//@Slf4j
 @CrossOrigin(origins={"http://localhost:8081","http://localhost:4200"})
 public class AuthorizationController {
 
@@ -71,12 +71,12 @@ public class AuthorizationController {
 	 */
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid UserRequest userRequest) {
-		log.info("START - login()");
+//		log.info("START - login()");
 		try {
 			Authentication authenticate = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(userRequest.getUsername(), userRequest.getPassword()));
 			if (authenticate.isAuthenticated()) {
-				log.info("Valid User detected - logged in");
+	//			log.info("Valid User detected - logged in");
 			}
 		} catch (BadCredentialsException e) {
 			throw new InvalidCredentialsException(BAD_CREDENTIALS_MESSAGE);
@@ -87,7 +87,7 @@ public class AuthorizationController {
 		}
 
 		String token = jwtUtil.generateToken(userRequest.getUsername());
-		log.info("END - login()");
+//		log.info("END - login()");
 		return ResponseEntity.ok(new JwtResponseToken(token));
 	}
 
@@ -103,7 +103,7 @@ public class AuthorizationController {
 	 */
 	@GetMapping("/validate")
 	public ResponseEntity<Boolean> validateAdmin(@RequestHeader("Authorization") String token) {
-		log.info("START - validateAdmin()");
+//		log.info("START - validateAdmin()");
 
 		// throws custom exception and response if token is invalid
 		jwtUtil.isTokenExpiredOrInvalidFormat(token);
@@ -112,7 +112,7 @@ public class AuthorizationController {
 		// granted
 		UserDetails user = userService.loadUserByUsername(jwtUtil.getUsernameFromToken(token));
 		if (user.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-			log.info("END - validateAdmin()");
+	//		log.info("END - validateAdmin()");
 			return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 		}
 
@@ -127,7 +127,7 @@ public class AuthorizationController {
 	 */
 	@GetMapping("/statusCheck")
 	public String statusCheck() {
-		log.info("OK");
+	//	log.info("OK");
 		return "OK";
 	}
 }

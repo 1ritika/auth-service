@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.cts.authorization.exception.InvalidTokenException;
 import com.cts.authorization.util.JwtUtil;
 
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * Test cases for JWT Utils class
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @SpringBootTest
-@Slf4j
+//@Slf4j
 class JWTUtilTests {
 
 	@Autowired
@@ -39,14 +39,14 @@ class JWTUtilTests {
 	@Test
 	@DisplayName("This method is responsible to test isTokenExpiredOrInvalidFormat()")
 	void testIsTokenExpiredOrInvalidFormat_validToken() {
-		log.info("START - testIsTokenExpiredOrInvalidFormat_validToken()");
+	//	log.info("START - testIsTokenExpiredOrInvalidFormat_validToken()");
 
 		// subject of our token
 		final String username = "admin1";
 
 		// generate our token
 		final String token = jwtUtil.generateToken(username);
-		log.info("Token: {}", token);
+		//log.info("Token: {}", token);
 
 		// Test the token validity
 		assertFalse(jwtUtil.isTokenExpiredOrInvalidFormat(token));
@@ -54,17 +54,17 @@ class JWTUtilTests {
 		// Token should not be null
 		assertNotNull(token);
 
-		log.info("END - testIsTokenExpiredOrInvalidFormat_validToken()");
+		//log.info("END - testIsTokenExpiredOrInvalidFormat_validToken()");
 	}
 
 	@Test
 	@DisplayName("This method is responsible to test isTokenExpiredOrInvalidFormat() for Expired token")
 	void testIsTokenExpiredOrInvalidFormat_expiredToken() {
-		log.info("START - testIsTokenExpiredOrInvalidFormat_expiredToken()");
+		//log.info("START - testIsTokenExpiredOrInvalidFormat_expiredToken()");
 
 		// generate our token
 		final String token = "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjcwMzE4MTgsInN1YiI6ImFkbWluMSIsImV4cCI6MTYyNzAzMTg3OH0.iBDf8UvcnHKa-TVHHxjOQUiC3oEVGgsYrJSvD5LhUQc";
-		log.info("Expired Token: {}", token);
+		//log.info("Expired Token: {}", token);
 
 		// Test the token validity
 		InvalidTokenException thrownException = assertThrows(InvalidTokenException.class, () -> jwtUtil.isTokenExpiredOrInvalidFormat(token));
@@ -73,17 +73,17 @@ class JWTUtilTests {
 		// Token should not be null
 		assertNotNull(token);
 
-		log.info("END - testIsTokenExpiredOrInvalidFormat_expiredToken()");
+		//log.info("END - testIsTokenExpiredOrInvalidFormat_expiredToken()");
 	}
 
 	@Test
 	@DisplayName("This method is responsible to test isTokenExpiredOrInvalidFormat() for Token with Invalid Format")
 	void testIsTokenExpiredOrInvalidFormat_invalidFormatToken() {
-		log.info("START - testIsTokenExpiredOrInvalidFormat_invalidFormatToken()");
+		//log.info("START - testIsTokenExpiredOrInvalidFormat_invalidFormatToken()");
 
 		// generate our token
 		final String token = "eyJhbGOiJIUzI1NiJ9.eyJpYXQiOjE2MjcwMzE4MTgsInN1YiI6ImFkbWluMSIsImV4cCI6MTYyNzAzMTg3OH0.iBDf8UvcnHKa-TVHHxjOQUiC3oEVGgsYrJSvD5LhUQc";
-		log.info("Malformed Token: {}", token);
+		//log.info("Malformed Token: {}", token);
 
 		// Test the token validity
 		InvalidTokenException thrownException = assertThrows(InvalidTokenException.class, () -> jwtUtil.isTokenExpiredOrInvalidFormat(token));
@@ -92,17 +92,17 @@ class JWTUtilTests {
 		// Token should not be null
 		assertNotNull(token);
 
-		log.info("END - testIsTokenExpiredOrInvalidFormat_invalidFormatToken()");
+		//log.info("END - testIsTokenExpiredOrInvalidFormat_invalidFormatToken()");
 	}
 	
 	@Test
 	@DisplayName("This method is responsible to test isTokenExpiredOrInvalidFormat() for Null token")
 	void testIsTokenExpiredOrInvalidFormat_nullToken() {
-		log.info("START - testIsTokenExpiredOrInvalidFormat_nullToken()");
+		//log.info("START - testIsTokenExpiredOrInvalidFormat_nullToken()");
 
 		// generate our token
 		final String token = null;
-		log.info("Null Token: {}", token);
+		//log.info("Null Token: {}", token);
 
 		// Test the token validity
 		InvalidTokenException thrownException = assertThrows(InvalidTokenException.class, () -> jwtUtil.isTokenExpiredOrInvalidFormat(token));
@@ -111,17 +111,17 @@ class JWTUtilTests {
 		// Token should not be null
 		assertNull(token);
 
-		log.info("END - testIsTokenExpiredOrInvalidFormat_nullToken()");
+		//log.info("END - testIsTokenExpiredOrInvalidFormat_nullToken()");
 	}
 	
 	@Test
 	@DisplayName("This method is responsible to test isTokenExpiredOrInvalidFormat() for Invalid token signature")
 	void testIsTokenExpiredOrInvalidFormat_invalidTokenSignature() {
-		log.info("START - testIsTokenExpiredOrInvalidFormat_invalidTokenSignature()");
+		//log.info("START - testIsTokenExpiredOrInvalidFormat_invalidTokenSignature()");
 
 		// generate our token
 		final String token = "eyJhbGciOiJIUzI1NiJ91.eyJpYXQiOjE2MjczMjA2ODIsInN1YiI6ImFkbWluMSIsImV4cCI6MTYyNzMyMDc0Mn0.tiQjNTsiLwo7Q2EyuJeV9p187jUZVr7PCTZMs9gvBgk";
-		log.info("Invalid token signature Token: {}", token);
+		//log.info("Invalid token signature Token: {}", token);
 
 		// Test the token validity
 		InvalidTokenException thrownException = assertThrows(InvalidTokenException.class, () -> jwtUtil.isTokenExpiredOrInvalidFormat(token));
@@ -130,25 +130,25 @@ class JWTUtilTests {
 		// Token should not be null
 		assertNotNull(token);
 
-		log.info("END - testIsTokenExpiredOrInvalidFormat_invalidTokenSignature()");
+		//log.info("END - testIsTokenExpiredOrInvalidFormat_invalidTokenSignature()");
 	}
 	
 	@Test
 	@DisplayName("This method is responsible to test GetUsernameFromToken()")
 	void testGetUsernameFromToken() {
-		log.info("START - testGetUsernameFromToken()");
+		//log.info("START - testGetUsernameFromToken()");
 
 		// Set the username
 		final String username = "admin1";
 
 		// Generate the token
 		String token = jwtUtil.generateToken(username);
-		log.info("Token: {}", token);
+		//log.info("Token: {}", token);
 
 		// Username should be equal
 		assertEquals(username, jwtUtil.getUsernameFromToken(token));
 
-		log.info("END - testGetUsernameFromToken()");
+		//log.info("END - testGetUsernameFromToken()");
 	}
 
 }
